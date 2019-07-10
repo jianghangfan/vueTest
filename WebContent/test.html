@@ -11,18 +11,39 @@
 	<p>message:{{message}}</p>
 	<p>{{hello()}}</p>
 	<div v-html="testhtml"></div>
+	<span v-bind:title='msg'>
+		鼠标悬停在上面查看信息。
+	</span>
+	<p v-if='seen'>现在你看见我了！</p>
+	<br><br>
+	<ul>
+		<li v-for="i in ins">
+			{{i.name}}
+		</li>
+	</ul>
+	<button v-on:click='clickMe'>点击我！</button>
+	
+	<input v-model="message">
 </div>
 <script type="text/javascript">
-	new Vue({
+	var v = new Vue({
 		el:"#vueTest",
 		data:{
 			url:"www.baidu.com",
 			message:"百度一下",
-			testhtml:'<h1>BaiDu</h1>'
+			testhtml:'<h1>BaiDu</h1>',
+			msg:'信息创建于：--'+new Date().toLocaleString(),
+			seen:true,
+			ins:[{name:'zhangsan'},{name:'lisi'},{name:'wangwu'}]
 		},
 		methods:{
 			hello:function(){
 				return this.message + "，你就知道";
+			},
+			clickMe:function(){
+				this.url="www.github.com",
+				this.message='GitHub',
+				this.testhtml='<h1>GitHub</h1>'
 			}
 		}
 	})
